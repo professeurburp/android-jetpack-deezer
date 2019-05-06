@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="deezerapi_default_margin">8dp</dimen>
+    <dimen name="deezerapi_cardview_default_elevation">2dp</dimen>
+    <dimen name="deezerapi_cardview_default_corner_radius">2dp</dimen>
+</resources>

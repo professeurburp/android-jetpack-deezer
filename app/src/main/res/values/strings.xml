@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Deezer Api Test</string>
+
+    <string name="no_albums">No album could be found for this user.</string>
+
+    <!-- AlbumOverview template -->
+    <string name="album_image_description">Album cover image</string>
+
+</resources>
