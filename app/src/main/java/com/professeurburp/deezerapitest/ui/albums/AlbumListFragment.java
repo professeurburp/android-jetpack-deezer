@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +40,6 @@ public class AlbumListFragment extends Fragment implements Injectable {
 
     private AlbumListFragmentBinding binding;
     private AlbumListViewModel albumListViewModel;
-
     private AlbumOverviewAdapter albumAdapter;
 
     @Nullable
@@ -61,7 +62,7 @@ public class AlbumListFragment extends Fragment implements Injectable {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        // Retrieve the desired ViewModel
+        // Retrieve the ViewModel for this fragment
         albumListViewModel =
                 ViewModelProviders
                         .of(this, viewModelFactory)
@@ -72,7 +73,7 @@ public class AlbumListFragment extends Fragment implements Injectable {
 
         initRecyclerView();
 
-        albumAdapter = new AlbumOverviewAdapter(dataBinding, executorPool);
+        albumAdapter = new AlbumOverviewAdapter(dataBinding, executorPool, this::onAlbumSelected);
         binding.userAlbumsRecyclerView.setAdapter(albumAdapter);
         binding.setAlbumList(albumListViewModel.getUserAlbums());
     }
@@ -97,5 +98,18 @@ public class AlbumListFragment extends Fragment implements Injectable {
                 .getUserAlbums()
                 .observe(getViewLifecycleOwner(),
                         listResource -> albumAdapter.submitList(listResource.data));
+    }
+
+    /**
+     * Callback from the AlbumOverviewAdapter that's called when any album is tapped/clicked
+     * in the album list.
+     *
+     * @param selectedAlbumId Selected album id to be provided to next screen, in order to display
+     *                        its details.
+     */
+    private void onAlbumSelected(int selectedAlbumId) {
+        NavHostFragment
+                .findNavController(this)
+                .navigate(AlbumListFragmentDirections.showAlbumDetails(selectedAlbumId));
     }
 }

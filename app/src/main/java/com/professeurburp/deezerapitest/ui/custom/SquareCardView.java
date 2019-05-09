@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 /**
- * SquareCardView is an override that allows to create square views in the albums list
+ * SquareCardView is an override that allows to create square views
  */
 public class SquareCardView extends CardView {
 

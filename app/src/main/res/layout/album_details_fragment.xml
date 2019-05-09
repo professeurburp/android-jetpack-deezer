@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.professeurburp.deezerapitest.ui.albumdetails.AlbumDetailsViewModel" />
+        <import type="com.professeurburp.deezerapitest.vo.Resource" />
+        <import type="com.professeurburp.deezerapitest.vo.Status" />
+        <import type="androidx.lifecycle.LiveData" />
+        <import type="java.util.List" />
+        <import type="com.professeurburp.deezerapitest.data.model.AlbumDetails" />
+        <import type="com.professeurburp.deezerapitest.data.model.TrackInfo" />
+
+        <variable
+            name="albumDetails"
+            type="LiveData&lt;Resource&lt;AlbumDetails>>" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@{albumDetails.data.title}"
+            />
+
+    </RelativeLayout>
+</layout>

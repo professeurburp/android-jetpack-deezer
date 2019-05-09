@@ -14,7 +14,10 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/deezerapi_default_margin"
         android:elevation="@dimen/deezerapi_cardview_default_elevation"
-        app:cardCornerRadius="@dimen/deezerapi_cardview_default_corner_radius">
+        app:cardCornerRadius="@dimen/deezerapi_cardview_default_corner_radius"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
         <FrameLayout
             android:layout_width="match_parent"

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs" // SafeArgs for Arch Components navigation
 
 android {
 
@@ -36,13 +37,19 @@ android {
     dataBinding {
         enabled = true
     }
+
+    buildTypes.each {
+        it.buildConfigField 'int', 'USER_ID', USER_ID
+        it.buildConfigField 'int', 'FAVORITES_LIMIT', FAVORITES_LIMIT
+    }
 }
 
 dependencies {
 
     def glideVersion = '4.9.0'
     def retrofitVersion = '2.5.0'
-    def daggerVersion = "2.17"
+    def daggerVersion = '2.17'
+    def flattenVersion = '0.8.1'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -54,7 +61,7 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment:2.0.0"
     implementation "androidx.navigation:navigation-ui:2.0.0"
-    // Room - ORM for data persistency
+    // Room - ORM for data persistence
     implementation 'androidx.room:room-runtime:2.0.0'
     annotationProcessor 'androidx.room:room-compiler:2.0.0'
 
@@ -71,6 +78,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    // Flatten - easy JSON flattening
+    implementation "org.itishka.gson-flatten:gson-flatten:$flattenVersion"
 
     // --- Testing libs ---
     testImplementation 'junit:junit:4.12'

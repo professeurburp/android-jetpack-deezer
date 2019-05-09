@@ -21,7 +21,7 @@ public class ApiResponse<T> {
 
     public static <T> ApiErrorResponse<T> create(Throwable error) {
         return new ApiErrorResponse<>(
-                error.getMessage() == null ?
+                error.getMessage() != null ?
                         error.getMessage() : "unknown error");
     }
 

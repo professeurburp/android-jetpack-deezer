@@ -4,13 +4,13 @@ import android.app.Application;
 
 import androidx.room.Room;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.professeurburp.deezerapitest.configuration.NetworkConstants;
-import com.professeurburp.deezerapitest.data.persistence.DeezerDatabase;
-import com.professeurburp.deezerapitest.data.persistence.dao.AlbumOverviewDao;
-import com.professeurburp.deezerapitest.data.repository.AlbumRepository;
-import com.professeurburp.deezerapitest.data.rest.AlbumWebService;
+import com.professeurburp.deezerapitest.data.rest.DeezerWebService;
 import com.professeurburp.deezerapitest.data.rest.LiveDataCallAdapterFactory;
-import com.professeurburp.deezerapitest.utils.ExecutorPool;
+
+import org.itishka.gsonflatten.FlattenTypeAdapterFactory;
 
 import javax.inject.Singleton;
 
@@ -19,31 +19,19 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module(includes = ViewModelModule.class)
+@Module(includes = {ViewModelModule.class, PersistenceModule.class})
 public class AppModule {
 
     @Provides
-    @Singleton
-    DeezerDatabase provideDatabase(Application application) {
-        return Room.databaseBuilder(application,
-                DeezerDatabase.class, "DeezerApiTest.db")
-                .build();
-    }
-
-    @Provides
-    @Singleton
-    AlbumOverviewDao provideAlbumDao(DeezerDatabase database) { return database.albumDao(); }
-
-    @Provides
-    @Singleton
-    AlbumRepository provideUserRepository(AlbumWebService webservice, AlbumOverviewDao userDao, ExecutorPool executorPool) {
-        return new AlbumRepository(webservice, userDao, executorPool);
-    }
-
-    @Provides
     Retrofit provideRetrofit() {
+
+        // Use Flatten
+        final Gson gson = new GsonBuilder()
+                .registerTypeAdapterFactory(new FlattenTypeAdapterFactory())
+                .create();
+
         return new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .baseUrl(NetworkConstants.DEEZER_ENDPOINT)
                 .build();
@@ -51,7 +39,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    AlbumWebService provideApiWebservice(Retrofit restAdapter) {
-        return restAdapter.create(AlbumWebService.class);
+    DeezerWebService provideApiWebservice(Retrofit restAdapter) {
+        return restAdapter.create(DeezerWebService.class);
     }
 }

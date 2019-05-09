@@ -1,76 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="com.professeurburp.deezerapitest.ui.albums.AlbumListViewModel" />
         <import type="com.professeurburp.deezerapitest.vo.Resource" />
         <import type="com.professeurburp.deezerapitest.vo.Status" />
-        <import type="androidx.lifecycle.LiveData"/>
-        <import type="java.util.List"/>
-        <import type="com.professeurburp.deezerapitest.data.model.AlbumOverview"/>
+        <import type="androidx.lifecycle.LiveData" />
+        <import type="java.util.List" />
+        <import type="com.professeurburp.deezerapitest.data.model.AlbumOverview" />
 
         <variable
             name="albumList"
             type="LiveData&lt;Resource&lt;List&lt;AlbumOverview>>>" />
-
-
-
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_layout"
+        <!-- Results list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_albums_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        -->
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="@integer/album_list_columns"
+            app:visibleGone="@{albumList.status == Status.SUCCESS &amp;&amp; albumList.data.size > 0}" />
 
-            <!--
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            -->
+        <!-- NO RESULTS TEXT -->
+        <TextView
+            android:id="@+id/landing_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/no_albums"
+            app:visibleGone="@{albumList.status == Status.SUCCESS &amp;&amp; albumList.data.size == 0}" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/user_albums_recycler_view"
-                    android:scrollbars="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="@integer/album_list_columns"
-                    />
-
-                <!-- NO RESULTS TEXT -->
-                <TextView
-                    android:id="@+id/landing_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_albums"
-                    app:visibleGone="@{albumList.status == Status.SUCCESS &amp;&amp; albumList.data.size == 0}"
-                    />
-
-            </LinearLayout>
-
-            <!--
-            <ListView
-                android:id="@android:id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-        -->
-
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

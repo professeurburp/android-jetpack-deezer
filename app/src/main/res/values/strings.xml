@@ -6,4 +6,7 @@
     <!-- AlbumOverview template -->
     <string name="album_image_description">Album cover image</string>
 
+    <!-- TrackInfo values -->
+    <string name="track_unknown_title">Unknown track name</string>
+
 </resources>

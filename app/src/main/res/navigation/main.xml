@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
     app:startDestination="@id/albumListFragment">
-
     <!-- Navigation home: we want to display the user's album list -->
     <fragment
         android:id="@+id/albumListFragment"
         android:name="com.professeurburp.deezerapitest.ui.albums.AlbumListFragment"
-        android:label="AlbumListFragment" />
-
+        android:label="AlbumListFragment">
+        <action
+            android:id="@+id/showAlbumDetails"
+            app:destination="@id/albumDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumDetailsFragment"
+        android:name="com.professeurburp.deezerapitest.ui.albumdetails.AlbumDetailsFragment"
+        android:label="AlbumDetailsFragment"
+        tools:layout="@layout/album_details_fragment">
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

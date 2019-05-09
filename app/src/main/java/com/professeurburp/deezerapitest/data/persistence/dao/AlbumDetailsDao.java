@@ -6,16 +6,16 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.professeurburp.deezerapitest.data.model.AlbumOverview;
+import com.professeurburp.deezerapitest.data.model.AlbumDetails;
 
 import java.util.List;
 
 @Dao
-public interface AlbumOverviewDao {
+public interface AlbumDetailsDao {
 
-    @Query("SELECT * FROM albumOverview")
-    LiveData<List<AlbumOverview>> loadAll();
+    @Query("SELECT * FROM albumDetails WHERE id = :albumId")
+    LiveData<AlbumDetails> getAlbumDetails(int albumId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAlbumsOverview(List<AlbumOverview> albumList);
+    void insertAlbumDetails(AlbumDetails albumDetails);
 }

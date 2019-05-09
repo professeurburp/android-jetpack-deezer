@@ -11,7 +11,6 @@ import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.internal.EverythingIsNonNull;
 
 /**
  * A Retrofit adapter that converts the Call into a LiveData of ApiResponse.

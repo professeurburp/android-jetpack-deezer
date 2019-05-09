@@ -18,15 +18,15 @@ public class AlbumOverview {
 
     @PrimaryKey
     @Expose
-    @SerializedName("w")
+    @SerializedName("id")
     private int id;
 
     @Expose
-    @SerializedName("w")
+    @SerializedName("title")
     private String title;
 
     @Expose
-    @SerializedName("w")
+    @SerializedName("cover")
     private String cover;
 
     public int getId() {

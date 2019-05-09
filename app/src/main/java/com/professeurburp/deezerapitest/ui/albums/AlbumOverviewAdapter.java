@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Consumer;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
@@ -17,8 +18,9 @@ import com.professeurburp.deezerapitest.utils.ExecutorPool;
 public class AlbumOverviewAdapter extends DataBoundListAdapter<AlbumOverview, AlbumOverviewItemBinding> {
 
     private final DataBindingComponent dataBindingComponent;
+    private final Consumer<Integer> selectedAlbumCallback;
 
-    AlbumOverviewAdapter(DataBindingComponent dataBindingComponent, ExecutorPool executorPool) {
+    AlbumOverviewAdapter(DataBindingComponent dataBindingComponent, ExecutorPool executorPool, Consumer<Integer> selectedCallback) {
         super(executorPool, new DiffUtil.ItemCallback<AlbumOverview>() {
             @Override
             public boolean areItemsTheSame(@NonNull AlbumOverview oldItem, @NonNull AlbumOverview newItem) {
@@ -32,6 +34,7 @@ public class AlbumOverviewAdapter extends DataBoundListAdapter<AlbumOverview, Al
         });
 
         this.dataBindingComponent = dataBindingComponent;
+        this.selectedAlbumCallback = selectedCallback;
     }
 
     @Override
@@ -47,5 +50,9 @@ public class AlbumOverviewAdapter extends DataBoundListAdapter<AlbumOverview, Al
     @Override
     protected void bind(AlbumOverviewItemBinding binding, AlbumOverview item) {
         binding.setAlbumOverview(item);
+
+        binding.getRoot()
+                .setOnClickListener(
+                        v -> selectedAlbumCallback.accept(item.getId()));
     }
 }
