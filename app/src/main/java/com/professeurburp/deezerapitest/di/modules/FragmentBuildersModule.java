@@ -1,7 +1,7 @@
 package com.professeurburp.deezerapitest.di.modules;
 
 import com.professeurburp.deezerapitest.ui.albumdetails.AlbumDetailsFragment;
-import com.professeurburp.deezerapitest.ui.albums.AlbumListFragment;
+import com.professeurburp.deezerapitest.ui.user.UserFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -10,7 +10,7 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
-    abstract AlbumListFragment contributeAlbumListFragment();
+    abstract UserFragment contributeAlbumListFragment();
 
     @ContributesAndroidInjector
     abstract AlbumDetailsFragment contributeAlbumDetailsFragment();

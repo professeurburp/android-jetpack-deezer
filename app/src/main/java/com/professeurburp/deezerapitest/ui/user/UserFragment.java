@@ -1,4 +1,4 @@
-package com.professeurburp.deezerapitest.ui.albums;
+package com.professeurburp.deezerapitest.ui.user;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,19 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingComponent;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.professeurburp.deezerapitest.R;
 import com.professeurburp.deezerapitest.binding.FragmentDataBindingComponent;
-import com.professeurburp.deezerapitest.databinding.AlbumListFragmentBinding;
+import com.professeurburp.deezerapitest.databinding.UserFragmentBinding;
 import com.professeurburp.deezerapitest.di.Injectable;
 import com.professeurburp.deezerapitest.utils.ExecutorPool;
 
@@ -28,7 +26,7 @@ import javax.inject.Inject;
 /**
  * UI Controller responsible for the display of the selected user's albums.
  */
-public class AlbumListFragment extends Fragment implements Injectable {
+public class UserFragment extends Fragment implements Injectable {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -36,10 +34,10 @@ public class AlbumListFragment extends Fragment implements Injectable {
     @Inject
     ExecutorPool executorPool;
 
-    private final DataBindingComponent dataBinding = new FragmentDataBindingComponent(this);
+    private final androidx.databinding.DataBindingComponent dataBinding = new FragmentDataBindingComponent(this);
 
-    private AlbumListFragmentBinding binding;
-    private AlbumListViewModel albumListViewModel;
+    private UserFragmentBinding binding;
+    private UserViewModel userViewModel;
     private AlbumOverviewAdapter albumAdapter;
 
     @Nullable
@@ -49,7 +47,7 @@ public class AlbumListFragment extends Fragment implements Injectable {
         // Inflate view with binding
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.album_list_fragment,
+                R.layout.user_fragment,
                 container,
                 false);
 
@@ -63,10 +61,10 @@ public class AlbumListFragment extends Fragment implements Injectable {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         // Retrieve the ViewModel for this fragment
-        albumListViewModel =
+        userViewModel =
                 ViewModelProviders
                         .of(this, viewModelFactory)
-                        .get(AlbumListViewModel.class);
+                        .get(UserViewModel.class);
 
         // Set binding lifecycle ownership
         binding.setLifecycleOwner(getViewLifecycleOwner());
@@ -75,7 +73,7 @@ public class AlbumListFragment extends Fragment implements Injectable {
 
         albumAdapter = new AlbumOverviewAdapter(dataBinding, executorPool, this::onAlbumSelected);
         binding.userAlbumsRecyclerView.setAdapter(albumAdapter);
-        binding.setAlbumList(albumListViewModel.getUserAlbums());
+        binding.setAlbumList(userViewModel.getUserAlbums());
     }
 
     private void initRecyclerView() {
@@ -94,7 +92,7 @@ public class AlbumListFragment extends Fragment implements Injectable {
                 });
 
         // Subscribe to ViewModel results, so that we can update the list accordingly
-        albumListViewModel
+        userViewModel
                 .getUserAlbums()
                 .observe(getViewLifecycleOwner(),
                         listResource -> albumAdapter.submitList(listResource.data));
@@ -110,6 +108,6 @@ public class AlbumListFragment extends Fragment implements Injectable {
     private void onAlbumSelected(int selectedAlbumId) {
         NavHostFragment
                 .findNavController(this)
-                .navigate(AlbumListFragmentDirections.showAlbumDetails(selectedAlbumId));
+                .navigate(UserFragmentDirections.showAlbumDetails(selectedAlbumId));
     }
 }

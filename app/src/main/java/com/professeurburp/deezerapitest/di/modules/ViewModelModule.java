@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.professeurburp.deezerapitest.di.qualifiers.ViewModelKey;
 import com.professeurburp.deezerapitest.ui.albumdetails.AlbumDetailsViewModel;
-import com.professeurburp.deezerapitest.ui.albums.AlbumListViewModel;
+import com.professeurburp.deezerapitest.ui.user.UserViewModel;
 import com.professeurburp.deezerapitest.viewmodel.DeezerViewModelFactory;
 
 import dagger.Binds;
@@ -17,8 +17,8 @@ public abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(AlbumListViewModel.class)
-    abstract ViewModel bindUserAlbumsViewModel(AlbumListViewModel albumListViewModel);
+    @ViewModelKey(UserViewModel.class)
+    abstract ViewModel bindUserAlbumsViewModel(UserViewModel userViewModel);
 
     @Binds
     @IntoMap

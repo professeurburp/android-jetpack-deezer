@@ -1,4 +1,4 @@
-package com.professeurburp.deezerapitest.ui.albums;
+package com.professeurburp.deezerapitest.ui.user;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

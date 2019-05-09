@@ -1,4 +1,4 @@
-package com.professeurburp.deezerapitest.ui.albums;
+package com.professeurburp.deezerapitest.ui.user;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class AlbumListViewModel extends ViewModel {;
+public class UserViewModel extends ViewModel {;
 
     private AlbumRepository albumRepository;
     private UserRepository userRepository;
@@ -22,7 +22,7 @@ public class AlbumListViewModel extends ViewModel {;
     private LiveData<Resource<List<AlbumOverview>>> albumList;
 
     @Inject
-    AlbumListViewModel(UserRepository userRepository, AlbumRepository albumRepository) {
+    UserViewModel(UserRepository userRepository, AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
         this.userRepository = userRepository;
 

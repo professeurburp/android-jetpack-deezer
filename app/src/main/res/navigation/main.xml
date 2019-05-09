@@ -7,7 +7,7 @@
     <!-- Navigation home: we want to display the user's album list -->
     <fragment
         android:id="@+id/albumListFragment"
-        android:name="com.professeurburp.deezerapitest.ui.albums.AlbumListFragment"
+        android:name="com.professeurburp.deezerapitest.ui.user.UserFragment"
         android:label="AlbumListFragment">
         <action
             android:id="@+id/showAlbumDetails"

@@ -14,11 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.professeurburp.deezerapitest.R;
-import com.professeurburp.deezerapitest.data.model.AlbumDetails;
 import com.professeurburp.deezerapitest.databinding.AlbumDetailsFragmentBinding;
 import com.professeurburp.deezerapitest.di.Injectable;
 import com.professeurburp.deezerapitest.utils.ExecutorPool;
-import com.professeurburp.deezerapitest.vo.Resource;
 
 import javax.inject.Inject;
 
