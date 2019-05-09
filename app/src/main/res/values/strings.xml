@@ -3,8 +3,15 @@
 
     <string name="no_albums">No album could be found for this user.</string>
 
-    <!-- AlbumOverview template -->
+    <!-- User layout -->
+    <string name="user_picture_description">Album cover image</string>
     <string name="album_image_description">Album cover image</string>
+
+    <plurals name="user_album_count">
+        <item quantity="zero">No album</item>
+        <item quantity="one">%d album</item>
+        <item quantity="other">%d albums</item>
+    </plurals>
 
     <!-- TrackInfo values -->
     <string name="track_unknown_title">Unknown track name</string>

@@ -3,4 +3,10 @@
     <dimen name="deezerapi_default_margin">8dp</dimen>
     <dimen name="deezerapi_cardview_default_elevation">2dp</dimen>
     <dimen name="deezerapi_cardview_default_corner_radius">2dp</dimen>
+
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="padding_xlarge">32dp</dimen>
+
 </resources>

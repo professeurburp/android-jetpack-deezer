@@ -1,6 +1,7 @@
 package com.professeurburp.deezerapitest.ui.user;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.professeurburp.deezerapitest.R;
 import com.professeurburp.deezerapitest.binding.FragmentDataBindingComponent;
+import com.professeurburp.deezerapitest.data.model.AlbumOverview;
+import com.professeurburp.deezerapitest.data.model.User;
 import com.professeurburp.deezerapitest.databinding.UserFragmentBinding;
 import com.professeurburp.deezerapitest.di.Injectable;
 import com.professeurburp.deezerapitest.utils.ExecutorPool;
+import com.professeurburp.deezerapitest.vo.Resource;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -49,7 +55,8 @@ public class UserFragment extends Fragment implements Injectable {
                 inflater,
                 R.layout.user_fragment,
                 container,
-                false);
+                false,
+                dataBinding);
 
         // Get and configure album RecyclerView (grid layout with 4 columns)
         binding.userAlbumsRecyclerView.setHasFixedSize(true);
@@ -69,11 +76,16 @@ public class UserFragment extends Fragment implements Injectable {
         // Set binding lifecycle ownership
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
+        applyBindings();
+    }
+
+    private void applyBindings() {
         initRecyclerView();
 
         albumAdapter = new AlbumOverviewAdapter(dataBinding, executorPool, this::onAlbumSelected);
         binding.userAlbumsRecyclerView.setAdapter(albumAdapter);
         binding.setAlbumList(userViewModel.getUserAlbums());
+        binding.setUser(userViewModel.getUser());
     }
 
     private void initRecyclerView() {

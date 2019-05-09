@@ -4,6 +4,8 @@ Simple demo project to test [Android Jetpack][jetpack] and [Architecture Compone
 
 ## Features
 
+![User Info Screen](art/user_info_capture.gif)
+
 ### Current
 
 * General architecture as per [Google Arch Components][arch] best pratices.
@@ -12,17 +14,16 @@ Simple demo project to test [Android Jetpack][jetpack] and [Architecture Compone
 * Navigation to album details when an album is clicked/tapped in the album list.
 
 ### Planned
-* General refactoring to have more meaningful names and cleaner code wherever necessary.
-* More intelligent data fetch from network. Currently, data is always fetched from local db no matter what.
-* Pretty user info display (add user info).
-* Pretty album details display with CoordinatorLayout and nice navigation animations.
+* Loading feedback to avoid blank screen on startup.
+* More intelligent data fetch from network. Currently, data is always fetched from local db then network no matter what.
+* Network errors/issues management and retry.
+* Pretty album details display with CoordinatorLayout. Currently album detailed info subset is retrieved, but only album name is displayed.
 * Better synchronization for user favorite albums, so that we can only load displayed data (infinite list loading)
-* Better network errors/issues management, and UI modifications accordingly.
 * Ability to change selected user, by searching users through the existing REST endpoint.
 * Make the UI more responsive based on device form factor.
 
 ### Challenges
-* Inifinite list loading and user albums synchronization. Not too challenging unless we want to add a sort order different from Open API default order (items are ordered by id asc by default in Deezer API).
+* Inifinite list loading and user albums synchronization. Not too challenging unless we want to add a sort order different from Open API default order (items are ordered by id asc by default in Deezer API and existing sort orders does not seem effective so far).
 * Entities rearchitecture will be necessary, as per Deezer Open API structure : all nested lists are encapsulated in a **_data_** or **_error_** object, meaning that a naive retrofit implementation as currently designed is not a very optimal (we're currently leaking _technical_ info in entities).
 
 ## Technical info and dependencies
@@ -32,7 +33,7 @@ Simple demo project to test [Android Jetpack][jetpack] and [Architecture Compone
 * It's plain old java. I know it. Next app will be using Kotlin. Some code have been ported from Kotlin, I figured this was the best way to dive into Kotlin syntax without being too painful. Well, that was quite painful at times anyway (Kotlin is more powerful and less verbose), but it was very instructive as well ;)
 
 * Data Fetch/Sync architecture as per Google Arch Components recommandations
-![Data access architecture schema](https://github.com/professeurburp/android-jetpack-deezer/blob/master/art/data_sync_architecture.png)
+![Data access architecture schema](art/data_sync_architecture.png)
 
 ### Jetpack and Architecture components
 

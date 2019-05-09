@@ -32,6 +32,7 @@
                 android:contentDescription="@string/album_image_description"
                 app:imageUrl="@{albumOverview.cover}" />
 
+            <!-- Currently hiding album name
             <TextView
                 android:id="@+id/single_album_title"
                 android:layout_width="match_parent"
@@ -40,6 +41,7 @@
                 android:layout_margin="2dp"
                 android:text="@{albumOverview.title}"
                 android:textColor="@android:color/white" />
+            -->
         </FrameLayout>
     </com.professeurburp.deezerapitest.ui.custom.SquareCardView>
 </layout>

@@ -10,15 +10,94 @@
         <import type="androidx.lifecycle.LiveData" />
         <import type="java.util.List" />
         <import type="com.professeurburp.deezerapitest.data.model.AlbumOverview" />
+        <import type="com.professeurburp.deezerapitest.data.model.User" />
+
+        <variable
+            name="user"
+            type="LiveData&lt;Resource&lt;User>>" />
 
         <variable
             name="albumList"
             type="LiveData&lt;Resource&lt;List&lt;AlbumOverview>>>" />
     </data>
 
-    <RelativeLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@android:color/white"
+            app:elevation="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/userInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="2dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/padding_large">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/userImage"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:shadowRadius="10"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            app:cardCornerRadius="50dp">
+
+                            <ImageView
+                                imageUrl="@{user.data.picture}"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:contentDescription="@string/user_picture_description" />
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/padding_large"
+                            android:layout_marginEnd="@dimen/padding_large"
+                            android:layout_toEndOf="@id/userImage"
+                            android:ellipsize="end"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            android:maxLines="2"
+                            android:text="@{user.data.name}" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Album Count -->
+                <TextView
+                    android:id="@+id/albumCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/padding_large"
+                    android:layout_below="@id/userInfo"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/padding_large"
+                    android:text="@{@plurals/user_album_count(albumList.data.size, albumList.data.size)}"
+                    app:visibleGone="@{albumList.status == Status.SUCCESS &amp;&amp; albumList.data.size > 0}"
+                    />
+
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Results list -->
         <androidx.recyclerview.widget.RecyclerView
@@ -28,7 +107,7 @@
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="@integer/album_list_columns"
-            app:visibleGone="@{albumList.status == Status.SUCCESS &amp;&amp; albumList.data.size > 0}" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <!-- NO RESULTS TEXT -->
         <TextView
@@ -39,5 +118,5 @@
             android:text="@string/no_albums"
             app:visibleGone="@{albumList.status == Status.SUCCESS &amp;&amp; albumList.data.size == 0}" />
 
-    </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
