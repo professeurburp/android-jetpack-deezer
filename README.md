@@ -14,6 +14,7 @@ Simple demo project to test [Android Jetpack][jetpack] and [Architecture Compone
 * Navigation to album details when an album is clicked/tapped in the album list, and some infor about the album are displayed.
 
 ### Planned (ordered)
+* Fix album network fetch, as some albums are throwing a JSON parse exception with current configuration.
 * Display albums track list and prettify album details display.
 * Loading feedback to avoid blank screen on startup.
 * Delete local favorite albums when a new user in selected (currently only adding).
