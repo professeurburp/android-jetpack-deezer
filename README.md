@@ -11,20 +11,21 @@ Simple demo project to test [Android Jetpack][jetpack] and [Architecture Compone
 * General architecture as per [Google Arch Components][arch] best pratices.
 * Retieves user info and all favorites albums for the user. User is currently defined in gradle.properties, and only albums are displayed so far, in a not so pretty manner.
 * All retrieved data is stored locally, and silently synced on each request, for a more reactive UI.
-* Navigation to album details when an album is clicked/tapped in the album list.
+* Navigation to album details when an album is clicked/tapped in the album list, and some infor about the album are displayed.
 
-### Planned
+### Planned (ordered)
+* Display albums track list and prettify album details display.
 * Loading feedback to avoid blank screen on startup.
-* More intelligent data fetch from network. Currently, data is always fetched from local db then network no matter what.
+* More intelligent data fetch from network. Currently, data is always fetched from local db then network no matter what. Some rate limiter (every 10 minutes or so could be a good idea)
 * Network errors/issues management and retry.
-* Pretty album details display with CoordinatorLayout. Currently album detailed info subset is retrieved, but only album name is displayed.
 * Better synchronization for user favorite albums, so that we can only load displayed data (infinite list loading)
 * Ability to change selected user, by searching users through the existing REST endpoint.
 * Make the UI more responsive based on device form factor.
 
 ### Challenges
 * Inifinite list loading and user albums synchronization. Not too challenging unless we want to add a sort order different from Open API default order (items are ordered by id asc by default in Deezer API and existing sort orders does not seem effective so far).
-* Entities rearchitecture will be necessary, as per Deezer Open API structure : all nested lists are encapsulated in a **_data_** or **_error_** object, meaning that a naive retrofit implementation as currently designed is not a very optimal (we're currently leaking _technical_ info in entities).
+* Entities rearchitecture will be necessary, as per Deezer Open API structure : all nested lists are encapsulated in a **_data_** or **_error_** object, meaning that a naive retrofit implementation as currently designed is not very optimal (we're currently exposing _technical_ objects in entities).
+* Better entity encapsulation in VM with the use of _**Transformations**_.
 
 ## Technical info and dependencies
 

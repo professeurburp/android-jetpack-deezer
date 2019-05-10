@@ -44,7 +44,7 @@ public class AlbumRepository {
         return new NetworkBoundResource<List<AlbumOverview>, DeezerListResponse<AlbumOverview>>(executorPool) {
             @Override
             protected void saveCallResult(DeezerListResponse<AlbumOverview> item) {
-                // TODO: optimize!!!
+                // TODO: 10/05/2019 - optimize!!!
                 // This is not optimal, we won't delete elements
                 // that are not present in request result any more...
                 albumOverviewDao.insertAlbumsOverview(item.getValues());
@@ -77,7 +77,7 @@ public class AlbumRepository {
 
             @Override
             protected boolean shouldFetch(@Nullable AlbumDetails data) {
-                // TODO: add discrimination so that we won't reload each time from network as well.
+                // TODO: 10/05/2019 - add discrimination so that we won't reload each time from network as well.
                 return true;
             }
 

@@ -4,7 +4,7 @@
     <string name="no_albums">No album could be found for this user.</string>
 
     <!-- User layout -->
-    <string name="user_picture_description">Album cover image</string>
+    <string name="user_picture_description">User picture</string>
     <string name="album_image_description">Album cover image</string>
 
     <plurals name="user_album_count">
@@ -12,6 +12,31 @@
         <item quantity="one">%d album</item>
         <item quantity="other">%d albums</item>
     </plurals>
+
+    <!-- Album details layout -->
+    <string name="artist_picture_description">Artist picture</string>
+    <plurals name="album_track_number">
+        <item quantity="zero">No track</item>
+        <item quantity="one">One track</item>
+        <item quantity="other">%d tracks</item>
+    </plurals>
+    <plurals name="album_fan_number">
+        <item quantity="zero">No fan</item>
+        <item quantity="one">One fan</item>
+        <item quantity="other">%d fans</item>
+    </plurals>
+    <plurals name="album_duration_hours">
+        <item quantity="zero" />
+        <item quantity="one">1h</item>
+        <item quantity="other">%dh</item>
+    </plurals>
+    <plurals name="album_duration_minutes">
+        <item quantity="zero">""</item>
+        <item quantity="one">1min</item>
+        <item quantity="other">%dmin</item>
+    </plurals>
+
+    <string name="album_release_date_format">%1$td/%1$tm/%1$tY</string>
 
     <!-- TrackInfo values -->
     <string name="track_unknown_title">Unknown track name</string>

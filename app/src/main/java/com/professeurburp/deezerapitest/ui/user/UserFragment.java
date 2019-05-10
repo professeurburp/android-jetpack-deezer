@@ -80,7 +80,8 @@ public class UserFragment extends Fragment implements Injectable {
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
         // Apply insets to draw under status bar and navigation bar
-        applyInsets();
+        // TODO: 10/05/2019 - Deactivated so far as this does not work as expected so far
+        // applyInsets();
 
         // Create bindings
         applyBindings();
@@ -105,7 +106,8 @@ public class UserFragment extends Fragment implements Injectable {
                         GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
                         int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
                         if (lastVisiblePosition == albumAdapter.getItemCount() - (R.integer.album_list_columns * 2)) {
-                            // TODO: trigger next page load when accessing the last rows.
+                            // TODO: 10/05/2019 - trigger next page load when accessing the last rows.
+                            // This has yet to be architectured and implemented
                         }
                     }
                 });
@@ -130,7 +132,7 @@ public class UserFragment extends Fragment implements Injectable {
                     params.setMargins(
                             params.leftMargin,
                             params.topMargin + insets.getSystemWindowInsetTop(),
-                            params.leftMargin,
+                            params.rightMargin,
                             params.bottomMargin);
                     appBarView.setLayoutParams(params);
 

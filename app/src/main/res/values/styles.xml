@@ -12,5 +12,7 @@
 
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <!-- TODO: 10/05/2019 - Fix pretty display under status and navbar -->
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 </resources>
