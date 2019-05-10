@@ -9,13 +9,14 @@ Simple demo project to test [Android Jetpack][jetpack] and [Architecture Compone
 ### Current
 
 * General architecture as per [Google Arch Components][arch] best pratices.
-* Retieves user info and all favorites albums for the user. User is currently defined in gradle.properties, and only albums are displayed so far, in a not so pretty manner.
+* Retieves user info and all favorites albums for the user. User is currently defined in gradle.properties, and user info (name and picture) as well as favorite albums are displayed.
 * All retrieved data is stored locally, and silently synced on each request, for a more reactive UI.
 * Navigation to album details when an album is clicked/tapped in the album list, and some infor about the album are displayed.
 
 ### Planned (ordered)
 * Display albums track list and prettify album details display.
 * Loading feedback to avoid blank screen on startup.
+* Delete local favorite albums when a new user in selected (currently only adding).
 * More intelligent data fetch from network. Currently, data is always fetched from local db then network no matter what. Some rate limiter (every 10 minutes or so could be a good idea)
 * Network errors/issues management and retry.
 * Better synchronization for user favorite albums, so that we can only load displayed data (infinite list loading)

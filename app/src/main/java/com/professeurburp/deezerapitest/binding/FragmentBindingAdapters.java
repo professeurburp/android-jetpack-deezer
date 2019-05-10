@@ -23,6 +23,7 @@ public class FragmentBindingAdapters {
     public void bindImage(ImageView imageView, String url) {
         Glide.with(fragment)
                 .load(url)
+                .placeholder(R.drawable.ic_cover_empty)
                 .fallback(R.drawable.ic_cover_empty)
                 .transition(DrawableTransitionOptions.withCrossFade(750))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
