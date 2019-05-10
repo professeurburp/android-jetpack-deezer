@@ -32,6 +32,7 @@
             app:elevation="0dp">
 
             <RelativeLayout
+                android:id="@+id/user_info_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_scrollFlags="scroll"

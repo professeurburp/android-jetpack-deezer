@@ -1,13 +1,16 @@
 package com.professeurburp.deezerapitest.ui.user;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -76,6 +79,10 @@ public class UserFragment extends Fragment implements Injectable {
         // Set binding lifecycle ownership
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
+        // Apply insets to draw under status bar and navigation bar
+        applyInsets();
+
+        // Create bindings
         applyBindings();
     }
 
@@ -108,6 +115,40 @@ public class UserFragment extends Fragment implements Injectable {
                 .getUserAlbums()
                 .observe(getViewLifecycleOwner(),
                         listResource -> albumAdapter.submitList(listResource.data));
+    }
+
+    private void applyInsets() {
+        View appBarView = binding.userInfoContainer;
+        View recyclerView = binding.userAlbumsRecyclerView;
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) appBarView.getLayoutParams();
+
+        // Add top margin toAppBar for a pretty UI (when scrolling, view will be displayed
+        // under status bar)
+        ViewCompat.setOnApplyWindowInsetsListener(
+                appBarView,
+                (view, insets) -> {
+                    params.setMargins(
+                            params.leftMargin,
+                            params.topMargin + insets.getSystemWindowInsetTop(),
+                            params.leftMargin,
+                            params.bottomMargin);
+                    appBarView.setLayoutParams(params);
+
+                    return insets;
+                });
+
+        // Do the same for bottom padding, so that the last row of albums won't be masked by navigation bar
+        ViewCompat.setOnApplyWindowInsetsListener(
+                recyclerView,
+                (view, insets) -> {
+                    view.setPadding(
+                            view.getPaddingLeft(),
+                            view.getPaddingTop(),
+                            view.getPaddingRight(),
+                            view.getPaddingBottom() + insets.getSystemWindowInsetBottom());
+
+                    return insets;
+                });
     }
 
     /**
