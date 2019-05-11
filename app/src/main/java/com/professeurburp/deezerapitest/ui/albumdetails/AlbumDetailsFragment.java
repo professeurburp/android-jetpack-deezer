@@ -1,6 +1,7 @@
 package com.professeurburp.deezerapitest.ui.albumdetails;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,11 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.professeurburp.deezerapitest.R;
 import com.professeurburp.deezerapitest.binding.FragmentDataBindingComponent;
+import com.professeurburp.deezerapitest.data.model.AlbumDetails;
 import com.professeurburp.deezerapitest.databinding.AlbumDetailsFragmentBinding;
 import com.professeurburp.deezerapitest.di.Injectable;
 import com.professeurburp.deezerapitest.utils.ExecutorPool;
+import com.professeurburp.deezerapitest.vo.Resource;
 
 import javax.inject.Inject;
 
@@ -58,11 +61,19 @@ public class AlbumDetailsFragment extends Fragment implements Injectable {
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
         // TODO: 10/05/2019 - Deactivated so far as this does not work as expected so far
-        applyInsets();
+        // applyInsets();
 
         final AlbumDetailsFragmentArgs params = AlbumDetailsFragmentArgs.fromBundle(getArguments());
         albumDetailsViewModel.setAlbumId(params.getAlbumId());
         binding.setAlbumDetails(albumDetailsViewModel.getAlbumDetails());
+
+        binding.setCallback(() -> albumDetailsViewModel.retry());
+
+        albumDetailsViewModel.getAlbumDetails().observe(getViewLifecycleOwner(), this::observeDetails);
+    }
+
+    private void observeDetails(Resource<AlbumDetails> albumDetailsResource) {
+        Log.d(this.getClass().getName(), "texte");
     }
 
     private void applyInsets() {

@@ -15,8 +15,7 @@ Simple demo project to test [Android Jetpack][jetpack] and [Architecture Compone
 
 ### Planned (ordered)
 * Fix album network fetch, as some albums are throwing a JSON parse exception with current configuration.
-* Display albums track list and prettify album details display.
-* Loading feedback to avoid blank screen on startup.
+* Display albums track list
 * Delete local favorite albums when a new user in selected (currently only adding).
 * More intelligent data fetch from network. Currently, data is always fetched from local db then network no matter what. Some rate limiter (every 10 minutes or so could be a good idea)
 * Network errors/issues management and retry.

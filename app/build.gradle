@@ -54,8 +54,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // --- AndroidX ---
-
-    // implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     // Flexbox Layout

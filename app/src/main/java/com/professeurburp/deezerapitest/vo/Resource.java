@@ -42,6 +42,11 @@ public class Resource<T> {
         return status;
     }
 
+    @Nullable
+    public String getMessage() {
+        return message;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

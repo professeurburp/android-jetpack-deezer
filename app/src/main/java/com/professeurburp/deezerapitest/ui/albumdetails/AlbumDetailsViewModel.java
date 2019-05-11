@@ -1,6 +1,8 @@
 package com.professeurburp.deezerapitest.ui.albumdetails;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
@@ -9,47 +11,36 @@ import com.professeurburp.deezerapitest.data.repository.AlbumRepository;
 import com.professeurburp.deezerapitest.vo.Resource;
 import com.professeurburp.deezerapitest.vo.Status;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 
 public class AlbumDetailsViewModel extends ViewModel {
     private final AlbumRepository albumRepository;
 
-    private int currentAlbumId;
-    private LiveData<Resource<AlbumDetails>> albumDetails;
-    private LiveData<String> albumAdditionalInfo; // Not used, just for reference and info about Transformations capabilities.
+    private final MutableLiveData<Integer> _currentAlbumId = new MutableLiveData<>();
+
+    private final LiveData<Resource<AlbumDetails>> albumDetails;
 
     @Inject
     public AlbumDetailsViewModel(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
+
+        albumDetails = Transformations.switchMap(_currentAlbumId, albumRepository::getAlbumDetails);
     }
 
     public void setAlbumId(int albumId) {
-        if (albumId == currentAlbumId) {
-            return;
-        }
-
-        currentAlbumId = albumId;
-        // We then trigger data retrieval, so that it can be displayed
-        albumDetails = albumRepository.getAlbumDetails(currentAlbumId);
-
-        // Also, if some info is dependant on the full album details,
-        // we can add a transformation so that we'll be able to bind directly on it without
-        // making these transformations in the UI classes.
-        albumAdditionalInfo = Transformations.map(albumDetails, this::parseAdditionalInfo);
-    }
-
-    private <Y, X> String parseAdditionalInfo(Resource<AlbumDetails> albumDetailsResource) {
-
-        if (!(albumDetailsResource.getStatus() == Status.SUCCESS) ||
-                albumDetailsResource.data == null) {
-            return ""; // No need to transform anything if no data.
-        }
-
-        // Anyway we're not doing anything, just keeping this for further notice.
-        return null;
+        _currentAlbumId.setValue(albumId);
     }
 
     public LiveData<Resource<AlbumDetails>> getAlbumDetails() {
         return albumDetails;
+    }
+
+    public void retry() {
+        // Just set the same value to the MutableLiveData
+        if (_currentAlbumId.getValue() != null) {
+            _currentAlbumId.setValue(_currentAlbumId.getValue());
+        }
     }
 }

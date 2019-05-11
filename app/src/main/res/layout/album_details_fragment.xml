@@ -15,9 +15,14 @@
         <variable
             name="albumDetails"
             type="LiveData&lt;Resource&lt;AlbumDetails>>" />
+
+
+        <variable
+            name="callback"
+            type="com.professeurburp.deezerapitest.ui.common.RetryCallback" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,7 +30,9 @@
             android:id="@+id/albumHeaderInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="2dp"
             app:visibleGone="@{albumDetails.status == Status.SUCCESS &amp;&amp; albumDetails.data != null}">
 
@@ -159,5 +166,17 @@
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <include
+            layout="@layout/loading_state"
+            app:resource="@{(Resource) albumDetails}"
+            app:callback="@{callback}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="@dimen/padding_normal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
