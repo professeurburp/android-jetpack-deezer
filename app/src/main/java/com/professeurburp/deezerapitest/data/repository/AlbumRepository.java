@@ -3,7 +3,7 @@ package com.professeurburp.deezerapitest.data.repository;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
-import com.professeurburp.deezerapitest.BuildConfig;
+import com.professeurburp.deezerapitest.config.Constants;
 import com.professeurburp.deezerapitest.data.common.ApiResponse;
 import com.professeurburp.deezerapitest.data.common.NetworkBoundResource;
 import com.professeurburp.deezerapitest.data.model.AlbumDetails;
@@ -62,7 +62,7 @@ public class AlbumRepository {
 
             @Override
             protected LiveData<ApiResponse<DeezerListResponse<AlbumOverview>>> createCall() {
-                return deezerWebService.listAlbums(userId, BuildConfig.FAVORITES_LIMIT);
+                return deezerWebService.listAlbums(userId, Constants.FAVORITES_LIMIT);
             }
         }.asLiveData();
     }

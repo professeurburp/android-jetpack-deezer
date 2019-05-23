@@ -37,11 +37,6 @@ android {
     dataBinding {
         enabled = true
     }
-
-    buildTypes.each {
-        it.buildConfigField 'int', 'USER_ID', USER_ID
-        it.buildConfigField 'int', 'FAVORITES_LIMIT', FAVORITES_LIMIT
-    }
 }
 
 dependencies {

@@ -13,9 +13,6 @@ import retrofit2.http.Query;
 
 public interface DeezerWebService {
 
-    public static String DEEZER_ENDPOINT = "https://api.deezer.com/2.0/";
-
-
     @GET("user/{user}")
     LiveData<ApiResponse<User>> getUser(@Path("user") int userId);
 

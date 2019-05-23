@@ -3,7 +3,7 @@ package com.professeurburp.deezerapitest.ui.user;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.professeurburp.deezerapitest.BuildConfig;
+import com.professeurburp.deezerapitest.config.Constants;
 import com.professeurburp.deezerapitest.data.model.AlbumOverview;
 import com.professeurburp.deezerapitest.data.model.User;
 import com.professeurburp.deezerapitest.data.repository.AlbumRepository;
@@ -27,8 +27,8 @@ public class UserViewModel extends ViewModel {;
         this.userRepository = userRepository;
 
         // Start user and albums retrieval as soon as possible
-        user = this.userRepository.getUser(BuildConfig.USER_ID);
-        albumList = this.albumRepository.getUserFavoriteAlbums(BuildConfig.USER_ID);
+        user = this.userRepository.getUser(Constants.USER_ID);
+        albumList = this.albumRepository.getUserFavoriteAlbums(Constants.USER_ID);
     }
 
     public LiveData<Resource<User>> getUser() { return  user; }

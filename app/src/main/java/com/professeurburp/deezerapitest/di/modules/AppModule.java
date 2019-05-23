@@ -2,6 +2,7 @@ package com.professeurburp.deezerapitest.di.modules;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.professeurburp.deezerapitest.config.Constants;
 import com.professeurburp.deezerapitest.data.rest.DeezerWebService;
 import com.professeurburp.deezerapitest.data.rest.LiveDataCallAdapterFactory;
 
@@ -28,7 +29,7 @@ public class AppModule {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
-                .baseUrl(DeezerWebService.DEEZER_ENDPOINT)
+                .baseUrl(Constants.DEEZER_ENDPOINT)
                 .build();
     }
 
